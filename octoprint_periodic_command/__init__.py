@@ -9,11 +9,17 @@ class PeriodicCommand(octoprint.plugin.SettingsPlugin,
                       octoprint.plugin.EventHandlerPlugin):
 
     def __init__(self):
+        self._logger.info("Periodic Command initialized")
         self._timer = None
         
     def get_settings_defaults(self):
         return dict(periodicCommand="curl -o /tmp/print.jpg 'http://localhost:8080/?action=snapshot' && mpack -s 'Progress of your print' /tmp/print.jpg gustavo@gustavo.eng.br",
                     periodicPeriod=60)
+
+    def get_template_configs(self):
+        return [
+            dict(type="settings", custom_bindings=False)
+        ]
 
     def on_event(self, event, payload):
         if event == Events.PRINT_STARTED:
