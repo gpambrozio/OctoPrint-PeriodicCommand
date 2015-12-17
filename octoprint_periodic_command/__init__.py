@@ -19,6 +19,10 @@ class PeriodicCommand(octoprint.plugin.StartupPlugin,
         return dict(periodicCommand="curl -o /tmp/print.jpg 'http://localhost:8080/?action=snapshot' && mpack -s 'Progress of your print' /tmp/print.jpg gustavo@gustavo.eng.br",
                     periodicPeriod=60)
 
+    def get_template_vars(self):
+        return dict(periodicCommand=self._settings.get(["periodicCommand"]),
+                    periodicPeriod=self._settings.get(["periodicPeriod"]),)
+        
     def get_template_configs(self):
         return [
             dict(type="settings", custom_bindings=False)
