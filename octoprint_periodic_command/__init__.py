@@ -10,7 +10,6 @@ class PeriodicCommand(octoprint.plugin.StartupPlugin,
                       octoprint.plugin.EventHandlerPlugin):
 
     def __init__(self):
-        self._logger.info("Periodic Command initialized")
         self._timer = None
         
     def on_after_startup(self):
