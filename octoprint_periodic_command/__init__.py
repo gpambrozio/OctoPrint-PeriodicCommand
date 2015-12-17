@@ -16,7 +16,7 @@ class PeriodicCommand(octoprint.plugin.SettingsPlugin,
                     periodicPeriod=60)
 
     def on_event(self, event, payload):
-        if event == PRINT_STARTED:
+        if event == Events.PRINT_STARTED:
             if self._timer is None:
                 self._timer = RepeatedTimer(int(self._settings.get(["periodicPeriod"])) * 60, self._timer_task)
                 self._timer.start()
