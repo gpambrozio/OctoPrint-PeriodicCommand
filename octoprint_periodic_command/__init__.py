@@ -12,7 +12,7 @@ class PeriodicCommand(octoprint.plugin.SettingsPlugin,
         self._timer = None
         
     def get_settings_defaults(self):
-        return dict(periodicCommand="curl -o /tmp/print.jpg "http://localhost:8080/?action=snapshot" && mpack -s "Progress of your print" /tmp/print.jpg gustavo@gustavo.eng.br",
+        return dict(periodicCommand="curl -o /tmp/print.jpg 'http://localhost:8080/?action=snapshot' && mpack -s 'Progress of your print' /tmp/print.jpg gustavo@gustavo.eng.br",
                     periodicPeriod=60)
 
     def on_event(self, event, payload):
