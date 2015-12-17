@@ -33,7 +33,7 @@ class PeriodicCommand(octoprint.plugin.StartupPlugin,
             if self._timer is None:
                 self._timer = RepeatedTimer(int(self._settings.get(["periodicPeriod"])) * 60, self._timer_task)
                 self._timer.start()
-        elif self._timer is not None and event in [Events.PRINT_CANCELLED, Events.PRINT_DONE, Events.FAILED]:
+        elif self._timer is not None and event in [Events.PRINT_CANCELLED, Events.PRINT_DONE, Events.PRINT_FAILED]:
             self._timer.cancel()
             self._timer = None
 
