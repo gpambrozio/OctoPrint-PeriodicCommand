@@ -5,13 +5,17 @@ import octoprint.plugin
 from octoprint.util import RepeatedTimer
 from octoprint.events import Events
 
-class PeriodicCommand(octoprint.plugin.SettingsPlugin,
+class PeriodicCommand(octoprint.plugin.StartupPlugin,
+                      octoprint.plugin.SettingsPlugin,
                       octoprint.plugin.EventHandlerPlugin):
 
     def __init__(self):
         self._logger.info("Periodic Command initialized")
         self._timer = None
         
+    def on_after_startup(self):
+        self._logger.info("Hello World! (more: %s)" % self._settings.get(["periodicCommand"]))
+
     def get_settings_defaults(self):
         return dict(periodicCommand="curl -o /tmp/print.jpg 'http://localhost:8080/?action=snapshot' && mpack -s 'Progress of your print' /tmp/print.jpg gustavo@gustavo.eng.br",
                     periodicPeriod=60)
