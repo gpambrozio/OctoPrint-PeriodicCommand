@@ -44,4 +44,5 @@ class PeriodicCommand(octoprint.plugin.StartupPlugin,
             self._logger.exception("Error when executing: {error}".format(error=e))
             return
             
+__plugin_name__ = "Periodic Command"
 __plugin_implementation__ = PeriodicCommand()
